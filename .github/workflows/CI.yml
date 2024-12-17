@@ -76,7 +76,7 @@ jobs:
           RUSTFLAGS: --cfg loom --cfg loom_nightly
         with:
           command: test
-          args: --release --test loom
+          args: --release
 
   miri-verify:
     name: Miri Verification

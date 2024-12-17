@@ -260,10 +260,5 @@ pub use cell::InitCell;
 #[cfg(feature = "tls")] mod thread_local;
 #[cfg(feature = "tls")] pub use tls::LocalInitCell;
 
-/// Exports for use by loom tests but otherwise private.
-#[cfg(loom)]
-#[path = "."]
-pub mod private {
-    /// The `Init` type.
-    pub mod init;
-}
+#[cfg(test)]
+mod tests;

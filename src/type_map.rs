@@ -202,12 +202,12 @@ impl TypeMap<kind::SendSync> {
     ///
     /// static TYPE_MAP: TypeMap![Send + Sync] = <TypeMap![Send + Sync]>::new();
     /// ```
-    #[cfg(not(loom))]
+    #[cfg(not(all(test, loom)))]
     pub const fn new() -> Self {
         new!()
     }
 
-    #[cfg(loom)]
+    #[cfg(all(test, loom))]
     pub fn new() -> Self {
         new!()
     }

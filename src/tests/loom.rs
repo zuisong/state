@@ -1,12 +1,10 @@
-#![cfg(loom)]
-
-use loom::sync::Arc;
 use loom::sync::atomic::{AtomicUsize, Ordering::Relaxed};
+use loom::sync::Arc;
 use loom::thread;
 
 #[test]
 fn init_exclusive() {
-    use state::private::init::Init;
+    use crate::init::Init;
 
     const THREADS: usize = 2;
 
@@ -38,7 +36,7 @@ fn init_exclusive() {
 
 #[test]
 fn init_completed() {
-    use state::private::init::Init;
+    use crate::init::Init;
 
     const THREADS: usize = 2;
 
@@ -74,7 +72,7 @@ fn init_completed() {
 
 #[test]
 fn cell() {
-    use state::InitCell;
+    use crate::InitCell;
 
     const THREADS: usize = 2;
 
@@ -102,7 +100,7 @@ fn cell() {
 
 #[test]
 fn type_map1() {
-    use state::TypeMap;
+    use crate::TypeMap;
 
     const THREADS: usize = 2;
 
@@ -130,11 +128,10 @@ fn type_map1() {
         assert_eq!(type_map.len(), 1);
     });
 }
+use crate::TypeMap;
 
 #[test]
 fn type_map2() {
-    use state::TypeMap;
-
     const THREADS: usize = 2;
 
     loom::model(|| {

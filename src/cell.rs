@@ -68,7 +68,7 @@ impl<T> InitCell<T> {
     ///
     /// static MY_GLOBAL: InitCell<String> = InitCell::new();
     /// ```
-    #[cfg(not(loom))]
+    #[cfg(not(all(test, loom)))]
     pub const fn new() -> InitCell<T> {
         InitCell {
             item: UnsafeCell::new(None),
@@ -77,7 +77,7 @@ impl<T> InitCell<T> {
     }
 
     /// New, for loom.
-    #[cfg(loom)]
+    #[cfg(all(test, loom))]
     pub fn new() -> InitCell<T> {
         InitCell {
             item: UnsafeCell::new(None),

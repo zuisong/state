@@ -9,7 +9,7 @@ pub struct Init {
 
 impl Init {
     /// A ready-to-init initializer.
-    #[cfg(not(loom))]
+    #[cfg(not(all(test, loom)))]
     pub const fn new() -> Init {
         Init {
             started: AtomicBool::new(false),
@@ -18,7 +18,7 @@ impl Init {
     }
 
     /// A ready-to-init initializer.
-    #[cfg(loom)]
+    #[cfg(all(test, loom))]
     pub fn new() -> Init {
         Init {
             started: AtomicBool::new(false),

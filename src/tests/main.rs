@@ -1,4 +1,3 @@
-extern crate state;
 
 use std::sync::{Arc, RwLock};
 
@@ -28,8 +27,9 @@ fn test_dropping_struct() {
 }
 
 mod type_map_tests {
+    use crate::TypeMap;
+
     use super::{DroppingStruct, DroppingStructWrap};
-    use super::state::TypeMap;
     use std::sync::{Arc, RwLock};
     use std::thread;
 
@@ -126,7 +126,7 @@ mod type_map_tests {
 #[cfg(feature = "tls")]
 mod type_map_tests_tls {
     use std::sync::{Arc, Barrier};
-    use super::state::TypeMap;
+    use crate::TypeMap;
     use std::cell::Cell;
     use std::thread;
 
@@ -204,10 +204,11 @@ mod type_map_tests_tls {
 }
 
 mod cell_tests {
-    use super::DroppingStruct;
-    use super::state::InitCell;
     use std::sync::{Arc, RwLock};
     use std::thread;
+
+    use crate::tests::main::DroppingStruct;
+    use crate::InitCell;
 
     #[test]
     fn simple_put_get() {
@@ -283,7 +284,7 @@ mod cell_tests {
 
 #[cfg(feature = "tls")]
 mod cell_tests_tls {
-    use super::state::LocalInitCell;
+    use crate::LocalInitCell;
 
     use std::thread;
     use std::cell::Cell;
